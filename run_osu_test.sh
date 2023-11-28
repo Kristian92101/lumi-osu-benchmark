@@ -6,11 +6,10 @@
 #SBATCH --nodes=2               # Total number of nodes 
 #SBATCH --gpus-per-node=8       # Allocate one gpu per MPI rank
 #SBATCH --time=2:00:00
-#SBATCH --account=project_465000572
+#SBATCH --account=
 
-ml PrgEnv-gnu/8.4.0 craype-accel-amd-gfx90a rocm/5.2.3 cray-python/3.10.10
+ml PrgEnv-gnu/8.4.0 craype-accel-amd-gfx90a rocm/5.2.3 cray-python/3.10.10 craype-hugepages16M
 
-#wget https://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-7.3.tar.gz
 
 curl https://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-7.3.tar.gz --output osu-micro-benchmarks-7.3.tar.gz
 
@@ -21,7 +20,7 @@ pip install --user matplotlib
 
 tar -xf osu-micro-benchmarks-7.3.tar.gz && cd ./osu-micro-benchmarks-7.3
 
-mkdir build && cd build
+mkdir -p build && cd build
 
 export CC=cc
 export CXX=CC
